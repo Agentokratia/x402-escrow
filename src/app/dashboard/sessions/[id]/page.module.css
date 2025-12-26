@@ -1,0 +1,109 @@
+.page {
+  width: 100%;
+}
+
+.loading {
+  text-align: center;
+  padding: var(--space-2xl);
+  color: var(--stone);
+}
+
+.error {
+  text-align: center;
+  padding: var(--space-2xl);
+  background: var(--white);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-md);
+}
+
+.error svg {
+  color: var(--error);
+  margin-bottom: var(--space-md);
+}
+
+.error p {
+  margin-bottom: var(--space-lg);
+  color: var(--stone);
+}
+
+.backLink {
+  color: var(--ink);
+  text-decoration: underline;
+}
+
+.header {
+  margin-bottom: var(--space-xl);
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--stone);
+  font-size: 14px;
+  margin-bottom: var(--space-md);
+  text-decoration: none;
+}
+
+.backBtn:hover {
+  color: var(--ink);
+}
+
+.headerMain {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.headerMain h1 {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.status {
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: var(--radius-full);
+  text-transform: capitalize;
+}
+
+/* Status badges with correct semantic colors */
+.statusActive {
+  background: var(--info-light);
+  color: var(--info);
+}
+
+.statusCaptured {
+  background: var(--success-light);
+  color: var(--success);
+}
+
+.statusVoided {
+  background: var(--cloud);
+  color: var(--stone);
+}
+
+.statusExpired {
+  background: var(--cloud);
+  color: var(--stone);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+@media (max-width: 768px) {
+  .headerMain h1 {
+    font-size: 24px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,257 @@
+/* Shared session component styles */
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+}
+
+.card h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--stone);
+  margin-bottom: var(--space-md);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-family: var(--font-sans);
+}
+
+/* Balance Bar */
+.balanceBar {
+  height: 10px;
+  background: var(--cloud);
+  border-radius: var(--radius-full);
+  display: flex;
+  overflow: hidden;
+  margin-bottom: var(--space-lg);
+}
+
+.barSettled {
+  background: var(--stone);
+  transition: width 0.3s ease;
+}
+
+.barPending {
+  background: var(--warning);
+  transition: width 0.3s ease;
+}
+
+.barAvailable {
+  background: var(--success);
+  transition: width 0.3s ease;
+}
+
+/* Balance Details */
+.balanceDetails {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.balanceRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.legendDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.balanceLabel {
+  color: var(--stone);
+  font-size: 14px;
+  flex: 1;
+}
+
+.balanceValue {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.balanceTotal {
+  margin-top: var(--space-sm);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--sand);
+}
+
+.balanceTotal .balanceLabel {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* Details List */
+.detailsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-md);
+}
+
+.detailLabel {
+  color: var(--stone);
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.detailValue {
+  font-size: 14px;
+  text-align: right;
+  word-break: break-all;
+  color: var(--ink);
+}
+
+.detailValue code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.detailWithHint {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.detailHint {
+  font-size: 12px;
+  color: var(--stone);
+}
+
+/* Transaction Links */
+.txLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--info);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.txLink:hover {
+  text-decoration: underline;
+}
+
+.txList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+/* Status Badge */
+.status {
+  display: inline-flex;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.statusActive {
+  background: var(--info-light);
+  color: var(--info);
+}
+
+.statusCaptured,
+.statusSettled {
+  background: var(--success-light);
+  color: var(--success);
+}
+
+.statusVoided {
+  background: var(--cloud);
+  color: var(--stone);
+}
+
+.statusExpired {
+  background: var(--cloud);
+  color: var(--stone);
+}
+
+/* Usage/Debits Table */
+.usageTable {
+  width: 100%;
+}
+
+.usageHeader {
+  display: grid;
+  grid-template-columns: 100px 1fr 140px;
+  gap: var(--space-md);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--sand);
+  font-size: 12px;
+  color: var(--stone);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+}
+
+.usageRow {
+  display: grid;
+  grid-template-columns: 100px 1fr 140px;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--cloud);
+  font-size: 14px;
+}
+
+.usageRow:last-child {
+  border-bottom: none;
+}
+
+.usageAmount {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.usageDesc {
+  color: var(--stone);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.usageDate {
+  color: var(--stone);
+  font-size: 13px;
+  text-align: right;
+}
+
+.emptyState {
+  text-align: center;
+  padding: var(--space-xl);
+  color: var(--stone);
+  font-size: 14px;
+}
+
+.noTxNote {
+  color: var(--stone);
+  font-size: 14px;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .usageHeader,
+  .usageRow {
+    grid-template-columns: 80px 1fr;
+  }
+
+  .usageHeader > *:last-child,
+  .usageRow > *:last-child {
+    display: none;
+  }
+}

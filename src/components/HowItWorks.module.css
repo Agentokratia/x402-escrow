@@ -1,0 +1,332 @@
+.container {
+  margin-top: 48px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.title {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.trustBadge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #22c55e;
+}
+
+/* Flow Diagram */
+.flowDiagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 32px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+}
+
+.flowStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.flowLabel {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.flowBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-width: 100px;
+}
+
+.flowBox strong {
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+}
+
+.flowBox span {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.flowBox[data-scheme='escrow'] {
+  border-color: rgba(59, 130, 246, 0.4);
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.flowBox[data-scheme='escrow'] strong {
+  color: #3b82f6;
+}
+
+.flowBox[data-scheme='session'] {
+  border-color: rgba(168, 85, 247, 0.4);
+  background: rgba(168, 85, 247, 0.1);
+}
+
+.flowBox[data-scheme='session'] strong {
+  color: #a855f7;
+}
+
+.flowBox[data-scheme='instant'] {
+  border-color: rgba(34, 197, 94, 0.4);
+  background: rgba(34, 197, 94, 0.1);
+}
+
+.flowBox[data-scheme='instant'] strong {
+  color: #22c55e;
+}
+
+.flowArrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.flowArrow::before {
+  content: '→';
+  font-size: 20px;
+}
+
+.flowArrow span {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Timeline */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.15s;
+  position: relative;
+  outline: none;
+}
+
+.step:hover,
+.step:focus,
+.step.active {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.step:focus-visible {
+  outline: 2px solid var(--info);
+  outline-offset: 2px;
+}
+
+.stepIcon {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.step[data-scheme='escrow'] .stepIcon {
+  background: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+}
+
+.step[data-scheme='session'] .stepIcon {
+  background: rgba(168, 85, 247, 0.2);
+  color: #a855f7;
+}
+
+.step.active .stepIcon {
+  background: var(--info);
+  color: white;
+}
+
+.stepContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.stepHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.stepContent h4 {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+.schemeBadge {
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.schemeBadge[data-scheme='escrow'] {
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+}
+
+.schemeBadge[data-scheme='session'] {
+  background: rgba(168, 85, 247, 0.15);
+  color: #a855f7;
+}
+
+.stepContent p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.detail {
+  display: block;
+  font-size: 13px;
+  color: var(--info);
+  margin-top: 8px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.connector {
+  position: absolute;
+  left: 35px;
+  top: 56px;
+  width: 2px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Protocol Note */
+.protocolNote {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+  padding: 12px;
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.protocolNote svg {
+  color: #22c55e;
+  flex-shrink: 0;
+}
+
+.protocolNote strong {
+  color: #22c55e;
+}
+
+@media (max-width: 640px) {
+  .flowDiagram {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .flowArrow {
+    transform: rotate(90deg);
+  }
+
+  .flowArrow::before {
+    content: '↓';
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 16px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .step {
+    padding: 12px;
+  }
+
+  .stepIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .connector {
+    left: 29px;
+    top: 48px;
+    height: 20px;
+  }
+}

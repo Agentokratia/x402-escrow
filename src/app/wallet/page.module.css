@@ -1,0 +1,639 @@
+.page {
+  width: 100%;
+}
+
+.header {
+  margin-bottom: var(--space-xl);
+}
+
+.header h1 {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: 400;
+  margin: 0 0 var(--space-sm) 0;
+}
+
+.intro {
+  font-size: 15px;
+  color: var(--stone);
+  line-height: 1.5;
+}
+
+.error {
+  background: var(--error-light);
+  border: 1px solid var(--error);
+  color: var(--error);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-lg);
+  font-size: 14px;
+}
+
+/* Empty State */
+.emptyState {
+  text-align: center;
+  padding: var(--space-2xl) var(--space-lg);
+}
+
+.emptyIcon {
+  width: 64px;
+  height: 64px;
+  background: var(--cloud);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-lg);
+  color: var(--stone);
+}
+
+.emptyState h2 {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: var(--space-sm);
+}
+
+.emptyState > p {
+  font-size: 15px;
+  color: var(--stone);
+  max-width: 400px;
+  margin: 0 auto var(--space-2xl);
+  line-height: 1.5;
+}
+
+.howItWorks {
+  background: var(--white);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
+  text-align: left;
+}
+
+.howItWorks h3 {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.benefitsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.benefit {
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+}
+
+.benefitIcon {
+  width: 28px;
+  height: 28px;
+  background: var(--ink);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.benefit strong {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.benefit p {
+  font-size: 13px;
+  color: var(--stone);
+  margin: 0;
+}
+
+/* Prominent Reclaim CTA */
+.reclaimCta {
+  background: var(--cloud);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.reclaimCtaContent {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.reclaimCtaIcon {
+  width: 48px;
+  height: 48px;
+  background: var(--sand);
+  color: var(--ink);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.reclaimCtaText h3 {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  color: var(--ink);
+}
+
+.reclaimCtaText p {
+  font-size: 14px;
+  color: var(--stone);
+  margin: 0;
+}
+
+.reclaimCtaBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--ink);
+  color: var(--white);
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  font-size: 14px;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.reclaimCtaBtn:hover {
+  background: #333;
+}
+
+/* Balance Card - when user has activity */
+.balanceCard {
+  background: linear-gradient(135deg, var(--ink) 0%, #333 100%);
+  color: var(--white);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.balanceMain {
+  flex: 1;
+}
+
+.balanceLabel {
+  font-size: 13px;
+  opacity: 0.8;
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+
+.balanceValue {
+  font-size: 36px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+
+.balanceHint {
+  font-size: 13px;
+  opacity: 0.6;
+  margin: 0;
+}
+
+.reclaimBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background: var(--white);
+  color: var(--ink);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+
+.reclaimBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Stats Row */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.stat {
+  background: var(--white);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  text-align: center;
+}
+
+.statValue {
+  font-size: 24px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+
+.statLabel {
+  font-size: 13px;
+  color: var(--stone);
+}
+
+/* Section & Action Card */
+.section {
+  margin-bottom: var(--space-2xl);
+}
+
+.actionCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--white);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  text-decoration: none;
+  color: var(--ink);
+  transition: all 0.15s;
+}
+
+.actionCard:hover {
+  border-color: var(--ink);
+}
+
+.actionCard h4 {
+  font-size: 15px;
+  margin-bottom: var(--space-xs);
+}
+
+.actionCard p {
+  font-size: 14px;
+  color: var(--stone);
+  margin: 0;
+}
+
+/* Client Integration Guide */
+.integrationGuide {
+  background: var(--white);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
+  margin-top: var(--space-2xl);
+}
+
+.guideHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.guideHeader svg {
+  color: var(--stone);
+}
+
+.guideHeader h3 {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.guideSection {
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--sand);
+}
+
+.guideSection:last-of-type {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.guideSection h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: var(--space-xs);
+}
+
+.guideSection > p {
+  color: var(--stone);
+  font-size: 14px;
+  margin-bottom: var(--space-lg);
+}
+
+/* Benefits Row */
+.benefitsRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+.benefitCard {
+  background: var(--cloud);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  text-align: center;
+}
+
+.benefitNum {
+  width: 32px;
+  height: 32px;
+  background: var(--ink);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 auto var(--space-sm);
+}
+
+.benefitCard strong {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.benefitCard p {
+  font-size: 13px;
+  color: var(--stone);
+  margin: 0;
+}
+
+/* Flow Diagram */
+.flowDiagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  background: var(--cloud);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-lg);
+}
+
+.flowActor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.flowIcon {
+  width: 40px;
+  height: 40px;
+  background: var(--ink);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: var(--font-sans);
+}
+
+.flowActor span {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.flowLabel {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--stone);
+}
+
+.flowArrow {
+  font-size: 24px;
+  color: var(--stone);
+}
+
+/* Flow Steps */
+.flowSteps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+.flowStep {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: flex-start;
+}
+
+.stepNum {
+  width: 24px;
+  height: 24px;
+  background: var(--ink);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.flowStep p {
+  font-size: 13px;
+  color: var(--stone);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.flowStep strong {
+  color: var(--ink);
+}
+
+/* Step Cards */
+.stepCard {
+  background: var(--white);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-md);
+  overflow: hidden;
+}
+
+.stepCard:last-child {
+  margin-bottom: 0;
+}
+
+.stepHeader {
+  display: flex;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  background: var(--paper);
+  border-bottom: 1px solid var(--sand);
+}
+
+.stepNumber {
+  width: 28px;
+  height: 28px;
+  background: var(--ink);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.stepHeader h5 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.stepHeader p {
+  font-size: 13px;
+  color: var(--stone);
+  margin: 0;
+}
+
+.stepHeader code {
+  background: var(--white);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+/* Code Block */
+.codeBlock {
+  background: var(--ink);
+  overflow-x: auto;
+}
+
+.codeBlock pre {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--cloud);
+  padding: var(--space-md);
+  margin: 0;
+  white-space: pre;
+}
+
+/* Headers Reference */
+.headersRef {
+  background: var(--cloud);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+}
+
+.headersRef h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+}
+
+.headersList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+}
+
+.headerItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-sm);
+  background: var(--white);
+  border-radius: var(--radius-sm);
+}
+
+.headerItem code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.headerItem span {
+  font-size: 12px;
+  color: var(--stone);
+}
+
+@media (max-width: 768px) {
+  .reclaimCta {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .reclaimCtaContent {
+    flex-direction: column;
+  }
+
+  .reclaimCtaBtn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .balanceCard {
+    flex-direction: column;
+    gap: var(--space-lg);
+    text-align: center;
+  }
+
+  .benefitsList {
+    gap: var(--space-md);
+  }
+
+  .flowDiagram {
+    flex-direction: column;
+  }
+
+  .flowArrow {
+    transform: rotate(90deg);
+  }
+
+  .flowSteps {
+    grid-template-columns: 1fr;
+  }
+
+  .stepHeader {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .headersList {
+    grid-template-columns: 1fr;
+  }
+
+  .benefitsRow {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,36 +1,133 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# x402 Escrow Facilitator
 
-## Getting Started
+Session-based x402 payments for high-frequency APIs. One signature creates a session, no more signing per request. Reclaim unused funds anytime.
 
-First, run the development server:
+**Live:** [facilitator.agentokratia.com](https://facilitator.agentokratia.com)
+
+## Features
+
+- **Session-based payments** - Sign once, make unlimited API calls
+- **Zero per-request gas** - Facilitator handles on-chain transactions
+- **100% reclaimable** - Withdraw unused funds anytime
+- **ERC-3009 gasless** - Users sign off-chain, no wallet transaction needed
+- **Base Mainnet + Sepolia** - Production and testnet support
+
+## Quick Start
+
+### Server Integration
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install @x402/core @x402/express @x402/escrow
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```typescript
+import { x402ResourceServer, HTTPFacilitatorClient } from '@x402/core/server';
+import { paymentMiddleware } from '@x402/express';
+import { EscrowScheme } from '@x402/escrow/server';
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+const facilitator = new HTTPFacilitatorClient({
+  url: 'https://facilitator.agentokratia.com',
+  createAuthHeaders: async () => ({
+    verify: { Authorization: `Bearer ${process.env.X402_API_KEY}` },
+    settle: { Authorization: `Bearer ${process.env.X402_API_KEY}` },
+    supported: {},
+  }),
+});
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+const server = new x402ResourceServer(facilitator).register('eip155:8453', new EscrowScheme());
 
-## Learn More
+app.use(
+  paymentMiddleware(
+    {
+      'GET /api/premium': {
+        accepts: { scheme: 'escrow', price: '$0.01', payTo: '0x...' },
+      },
+    },
+    server
+  )
+);
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Client Integration
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```typescript
+import { createEscrowFetch } from '@x402/escrow/client';
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+const { fetch: escrowFetch, scheme } = createEscrowFetch(walletClient);
 
-## Deploy on Vercel
+// Payments handled automatically
+const response = await escrowFetch('https://api.example.com/premium');
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+// Access sessions
+scheme.sessions.getAll();
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## How It Works
+
+```
+1. User signs ERC-3009 authorization (gasless)
+2. Facilitator deposits funds to escrow contract
+3. Session created with balance
+4. Each API call debits from session (no signature needed)
+5. User can reclaim unused funds anytime
+```
+
+## API Endpoints
+
+| Endpoint             | Description                       |
+| -------------------- | --------------------------------- |
+| `GET /api/supported` | Get supported networks and config |
+| `POST /api/verify`   | Verify payment payload            |
+| `POST /api/settle`   | Settle payment on-chain           |
+
+## Networks
+
+| Network      | Chain ID | Escrow Contract                              |
+| ------------ | -------- | -------------------------------------------- |
+| Base Mainnet | 8453     | `0xbDEa0d1BCc5966192b070fDF62ab4eF5B4420Cff` |
+| Base Sepolia | 84532    | `0xbDEa0d1BCc5966192b070fDF62ab4eF5B4420Cff` |
+
+## Environment Variables
+
+```bash
+# Required
+NEXT_PUBLIC_SUPABASE_URL=
+SUPABASE_SERVICE_KEY=
+JWT_SECRET=                    # 32+ chars
+NEXT_PUBLIC_WALLETCONNECT_ID=
+
+# CDP Wallet (production)
+CDP_API_KEY_ID=
+CDP_API_KEY_SECRET=
+CDP_WALLET_SECRET=
+
+# Or Private Key (development)
+WALLET_PROVIDER=private-key
+FACILITATOR_PRIVATE_KEY=0x...
+```
+
+## Development
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Run tests
+npm test
+
+# Build for production
+npm run build
+```
+
+## Documentation
+
+- [Server Integration](./docs/SERVER_INTEGRATION.md)
+- [Client Integration](./docs/CLIENT_INTEGRATION.md)
+- [Architecture](./docs/ARCHITECTURE.md)
+
+## License
+
+MIT - see [LICENSE](./LICENSE)

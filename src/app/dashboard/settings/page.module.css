@@ -1,0 +1,247 @@
+.page {
+  width: 100%;
+}
+
+.header {
+  margin-bottom: var(--space-xl);
+}
+
+.header h1 {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: var(--space-xs);
+}
+
+.header p {
+  font-size: 15px;
+  color: var(--stone);
+  line-height: 1.5;
+}
+
+.section h2 {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.loading {
+  text-align: center;
+  padding: var(--space-3xl);
+  color: var(--stone);
+}
+
+.error {
+  background: var(--danger-bg, #fef2f2);
+  border: 1px solid var(--danger, #ef4444);
+  color: var(--danger, #ef4444);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-lg);
+  font-size: 14px;
+}
+
+.success {
+  background: var(--success-light, #f0fdf4);
+  border: 1px solid var(--success, #22c55e);
+  color: var(--success, #22c55e);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-lg);
+  font-size: 14px;
+}
+
+.section {
+  margin-bottom: var(--space-xl);
+}
+
+.section h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+}
+
+.walletRow {
+  display: flex;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-lg);
+}
+
+.walletInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.label {
+  font-size: 12px;
+  color: var(--stone);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.addressRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.address {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink);
+  word-break: break-all;
+}
+
+.iconBtn {
+  padding: var(--space-xs);
+  background: none;
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-sm);
+  color: var(--stone);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconBtn:hover {
+  background: var(--cloud);
+  color: var(--ink);
+}
+
+.networkName {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-weight: 500;
+}
+
+.testnetBadge {
+  font-size: 11px;
+  padding: 2px 6px;
+  background: var(--warning-light);
+  color: var(--warning);
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.walletActions {
+  display: flex;
+  gap: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--sand);
+}
+
+.explorerLink {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 14px;
+  color: var(--info);
+  text-decoration: none;
+}
+
+.explorerLink:hover {
+  text-decoration: underline;
+}
+
+.disconnectBtn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 8px 14px;
+  background: none;
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--stone);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.disconnectBtn:hover {
+  background: var(--cloud);
+  color: var(--ink);
+  border-color: var(--stone);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.fieldLabel {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.input {
+  padding: 12px;
+  background: var(--paper);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--ink);
+}
+
+.hint {
+  font-size: 12px;
+  color: var(--stone);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.saveBtn {
+  padding: 12px 24px;
+  background: var(--ink);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.saveBtn:hover:not(:disabled) {
+  background: #333;
+}
+
+.saveBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .walletRow {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .walletActions {
+    flex-direction: column;
+  }
+}

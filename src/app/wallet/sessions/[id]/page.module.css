@@ -1,0 +1,549 @@
+.page {
+  width: 100%;
+}
+
+.loading {
+  text-align: center;
+  padding: var(--space-2xl);
+  color: var(--stone);
+}
+
+.error {
+  text-align: center;
+  padding: var(--space-2xl);
+  background: var(--white);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-md);
+}
+
+.error svg {
+  color: var(--error);
+  margin-bottom: var(--space-md);
+}
+
+.error p {
+  margin-bottom: var(--space-lg);
+  color: var(--stone);
+}
+
+.backLink {
+  color: var(--ink);
+  text-decoration: underline;
+}
+
+.header {
+  margin-bottom: var(--space-xl);
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--stone);
+  font-size: 14px;
+  margin-bottom: var(--space-md);
+  text-decoration: none;
+}
+
+.backBtn:hover {
+  color: var(--ink);
+}
+
+.headerMain {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.headerMain h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.status {
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: var(--radius-full);
+  text-transform: capitalize;
+}
+
+/* Status badges with correct semantic colors */
+.statusActive {
+  background: var(--info-light);
+  color: var(--info);
+}
+
+.statusCaptured {
+  background: var(--success-light);
+  color: var(--success);
+}
+
+.statusVoided {
+  background: var(--cloud);
+  color: var(--stone);
+}
+
+.statusExpired {
+  background: var(--cloud);
+  color: var(--stone);
+}
+
+.errorBanner {
+  background: var(--error-light);
+  border: 1px solid var(--error);
+  color: var(--error);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-lg);
+  font-size: 14px;
+}
+
+.successBanner {
+  background: var(--success-light);
+  border: 1px solid var(--success);
+  color: var(--success);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-lg);
+  font-size: 14px;
+}
+
+.warningBanner {
+  background: var(--warning-light, #fef3c7);
+  border: 1px solid var(--warning);
+  color: var(--warning-dark, #92400e);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-lg);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.infoBanner {
+  background: var(--info-light);
+  border: 1px solid var(--info);
+  color: var(--info);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-lg);
+  font-size: 14px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.balanceWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+}
+
+.card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: var(--space-lg);
+  font-family: var(--font-sans);
+}
+
+.balanceBar {
+  display: flex;
+  height: 12px;
+  background: var(--cloud);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: var(--space-lg);
+}
+
+/* Balance bar colors with correct semantics:
+   - Captured/Spent: Gray (neutral - money has been used)
+   - Pending: Yellow (warning - not yet settled)
+   - Available: Green (positive - can be reclaimed) */
+.barCaptured {
+  background: var(--stone);
+}
+
+.barPending {
+  background: var(--warning);
+}
+
+.barAvailable {
+  background: var(--success);
+}
+
+.balanceDetails {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.balanceRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.balanceTotal {
+  margin-top: var(--space-sm);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--sand);
+}
+
+.legendDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.balanceLabel {
+  flex: 1;
+  font-size: 14px;
+  color: var(--stone);
+}
+
+.balanceValue {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.reclaimBtn {
+  width: 100%;
+  margin-top: var(--space-lg);
+  padding: var(--space-md);
+  background: var(--ink);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  font-family: var(--font-sans);
+}
+
+.reclaimBtn:hover {
+  opacity: 0.9;
+}
+
+.reclaimBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.voidedNote {
+  margin-top: var(--space-lg);
+  text-align: center;
+  font-size: 14px;
+  color: var(--stone);
+}
+
+.expiredReclaimBox {
+  margin-top: var(--space-lg);
+  padding: var(--space-md);
+  background: var(--warning-light, #fef3c7);
+  border: 1px solid var(--warning);
+  border-radius: var(--radius-md);
+}
+
+.expiredNote {
+  font-size: 14px;
+  color: var(--warning-dark, #92400e);
+  margin-bottom: var(--space-md);
+}
+
+.expiredReclaimBox .reclaimBtn {
+  margin-top: 0;
+}
+
+.detailsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detailLabel {
+  font-size: 14px;
+  color: var(--stone);
+}
+
+.detailWithHint {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.detailHint {
+  font-size: 12px;
+  color: var(--stone);
+  opacity: 0.7;
+}
+
+.detailValue {
+  font-size: 14px;
+  font-family: var(--font-mono);
+}
+
+.debitsSection {
+  background: var(--white);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+}
+
+.debitsSection h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: var(--space-lg);
+  font-family: var(--font-sans);
+}
+
+.emptyDebits {
+  text-align: center;
+  padding: var(--space-xl);
+  color: var(--stone);
+}
+
+.debitsTable {
+  display: flex;
+  flex-direction: column;
+}
+
+.debitsHeader {
+  display: grid;
+  grid-template-columns: 100px 1fr 150px;
+  gap: var(--space-md);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--sand);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--stone);
+  text-transform: uppercase;
+}
+
+.debitRow {
+  display: grid;
+  grid-template-columns: 100px 1fr 150px;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--cloud);
+  font-size: 14px;
+}
+
+.debitRow:last-child {
+  border-bottom: none;
+}
+
+.debitAmount {
+  font-weight: 500;
+}
+
+.debitDesc {
+  color: var(--stone);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.debitDate {
+  color: var(--stone);
+  font-size: 13px;
+}
+
+/* Transaction links */
+.txLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--info);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 14px;
+}
+
+.txLink:hover {
+  text-decoration: underline;
+}
+
+.txLink code {
+  font-family: inherit;
+}
+
+.txLink svg {
+  flex-shrink: 0;
+}
+
+.txList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  align-items: flex-end;
+}
+
+.noTxNote {
+  color: var(--stone);
+  font-size: 14px;
+  text-align: center;
+  padding: var(--space-md) 0;
+}
+
+/* Screen reader only - visually hidden but accessible */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Reclaim Confirmation Modal */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--space-md);
+}
+
+.modal {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  max-width: 420px;
+  width: 100%;
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.modal h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+  font-family: var(--font-sans);
+}
+
+.modalText {
+  font-size: 14px;
+  color: var(--stone);
+  margin-bottom: var(--space-md);
+}
+
+.modalList {
+  font-size: 14px;
+  color: var(--ink);
+  margin: 0 0 var(--space-md) var(--space-lg);
+  padding: 0;
+}
+
+.modalList li {
+  margin-bottom: var(--space-xs);
+}
+
+.modalList strong {
+  font-weight: 600;
+}
+
+.modalWarning {
+  font-size: 13px;
+  color: var(--warning-dark, #92400e);
+  background: var(--warning-light, #fef3c7);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.modalActions {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: flex-end;
+}
+
+.modalCancelBtn {
+  padding: var(--space-sm) var(--space-lg);
+  background: var(--cloud);
+  color: var(--ink);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  transition: background 0.15s;
+}
+
+.modalCancelBtn:hover {
+  background: var(--sand);
+}
+
+.modalConfirmBtn {
+  padding: var(--space-sm) var(--space-lg);
+  background: var(--ink);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  transition: opacity 0.15s;
+}
+
+.modalConfirmBtn:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .debitsHeader,
+  .debitRow {
+    grid-template-columns: 80px 1fr;
+  }
+
+  .debitsHeader span:last-child,
+  .debitRow .debitDate {
+    display: none;
+  }
+
+  .modal {
+    margin: var(--space-md);
+  }
+
+  .modalActions {
+    flex-direction: column-reverse;
+  }
+
+  .modalCancelBtn,
+  .modalConfirmBtn {
+    width: 100%;
+  }
+}

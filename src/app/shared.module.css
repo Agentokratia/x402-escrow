@@ -1,0 +1,290 @@
+/* Shared page styles for consistency */
+
+.page {
+  width: 100%;
+}
+
+/* Page Header */
+.header {
+  margin-bottom: var(--space-xl);
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-lg);
+}
+
+.header h1 {
+  font-size: 24px;
+  margin-bottom: var(--space-xs);
+}
+
+.headerSubtitle {
+  font-size: 15px;
+  color: var(--stone);
+  line-height: 1.5;
+}
+
+/* Primary Button */
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 10px 18px;
+  background: var(--ink);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.btnPrimary:hover {
+  background: #333;
+}
+
+.btnPrimary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btnPrimary:focus-visible {
+  outline: 2px solid var(--info);
+  outline-offset: 2px;
+}
+
+/* Secondary Button */
+.btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 10px 18px;
+  background: var(--white);
+  color: var(--ink);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+}
+
+.btnSecondary:hover {
+  background: var(--cloud);
+  border-color: var(--stone);
+}
+
+.btnSecondary:focus-visible {
+  outline: 2px solid var(--info);
+  outline-offset: 2px;
+}
+
+/* Error Alert */
+.error {
+  background: var(--danger-bg, #fef2f2);
+  border: 1px solid var(--danger, #ef4444);
+  color: var(--danger, #ef4444);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-lg);
+  font-size: 14px;
+}
+
+/* Empty State */
+.empty {
+  text-align: center;
+  padding: var(--space-3xl) var(--space-xl);
+  background: var(--white);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-md);
+}
+
+.empty h3 {
+  font-size: 18px;
+  margin-bottom: var(--space-sm);
+}
+
+.empty p {
+  color: var(--stone);
+  font-size: 14px;
+}
+
+/* Loading */
+.loading {
+  text-align: center;
+  padding: var(--space-3xl);
+  color: var(--stone);
+  font-size: 14px;
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  gap: var(--space-xs);
+  flex-shrink: 0;
+}
+
+.filterBtn {
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--white);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--font-sans);
+  color: var(--stone);
+}
+
+.filterBtn:hover {
+  border-color: var(--stone);
+  color: var(--ink);
+}
+
+.filterBtnActive {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--white);
+}
+
+.filterBtnActive:hover {
+  background: #333;
+}
+
+/* Card */
+.card {
+  background: var(--white);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+}
+
+/* Status Badges */
+.status {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: var(--radius-full);
+  text-transform: capitalize;
+}
+
+/* Status badges with correct semantic colors:
+   - Active: Blue (neutral active state)
+   - Captured: Green (successful completion)
+   - Voided: Gray (neutral termination)
+   - Expired: Gray (not an error, just ended) */
+.statusActive {
+  background: var(--info-light);
+  color: var(--info);
+}
+
+.statusCaptured {
+  background: var(--success-light);
+  color: var(--success);
+}
+
+.statusVoided {
+  background: var(--cloud);
+  color: var(--stone);
+}
+
+.statusExpired {
+  background: var(--cloud);
+  color: var(--stone);
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: var(--space-lg);
+}
+
+.modalContent {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modalContent h3 {
+  font-size: 18px;
+  margin-bottom: var(--space-xs);
+}
+
+.modalContent > p {
+  color: var(--stone);
+  font-size: 14px;
+  margin-bottom: var(--space-lg);
+}
+
+.modalActions {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: flex-end;
+  margin-top: var(--space-lg);
+}
+
+/* Form Elements */
+.label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: var(--space-xs);
+}
+
+.input {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: var(--paper);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--ink);
+}
+
+/* Section */
+.section {
+  margin-bottom: var(--space-2xl);
+}
+
+.sectionTitle {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+}
+
+@media (max-width: 768px) {
+  .headerRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filters {
+    flex-wrap: wrap;
+  }
+}
