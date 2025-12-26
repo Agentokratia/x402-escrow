@@ -124,9 +124,9 @@ npm run build
 
 ## Documentation
 
-- [Server Integration](./docs/SERVER_INTEGRATION.md)
-- [Client Integration](./docs/CLIENT_INTEGRATION.md)
-- [Architecture](./docs/ARCHITECTURE.md)
+- [API Reference](./docs/API.md)
+- [Usage Guide](./docs/GUIDE.md)
+- [Specification](./docs/SPEC.md)
 
 ## License
 
