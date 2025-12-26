@@ -3,7 +3,7 @@
 ## Client
 
 ```typescript
-import { createEscrowFetch } from '@x402/escrow/client';
+import { createEscrowFetch } from '@agentokratia/x402-escrow/client';
 
 const escrowFetch = createEscrowFetch({ wallet, facilitatorUrl });
 
@@ -22,7 +22,7 @@ const response = await escrowFetch('https://api.example.com/premium');
 
 ```typescript
 import { x402ResourceServer, HTTPFacilitatorClient } from '@x402/core/server';
-import { EscrowScheme } from '@x402/escrow/server';
+import { EscrowScheme } from '@agentokratia/x402-escrow/server';
 
 const facilitator = new HTTPFacilitatorClient({
   url: process.env.FACILITATOR_URL,

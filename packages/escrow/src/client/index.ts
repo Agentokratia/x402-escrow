@@ -7,7 +7,7 @@
  *
  * @example Simple (recommended)
  * ```typescript
- * import { createEscrowFetch } from '@x402/escrow/client';
+ * import { createEscrowFetch } from '@agentokratia/x402-escrow/client';
  *
  * const { fetch: escrowFetch, scheme, x402 } = createEscrowFetch(walletClient);
  * const response = await escrowFetch('https://api.example.com/premium');
@@ -29,7 +29,7 @@
  * ```typescript
  * import { x402Client } from '@x402/core/client';
  * import { wrapFetchWithPayment } from '@x402/fetch';
- * import { EscrowScheme, withSessionExtraction } from '@x402/escrow/client';
+ * import { EscrowScheme, withSessionExtraction } from '@agentokratia/x402-escrow/client';
  *
  * const escrowScheme = new EscrowScheme(walletClient);
  * const x402 = new x402Client()

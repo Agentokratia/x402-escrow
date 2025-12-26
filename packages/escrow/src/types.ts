@@ -1,5 +1,5 @@
 /**
- * x402 Protocol Types for @x402/escrow
+ * x402 Protocol Types for @agentokratia/x402-escrow
  *
  * Subset of types needed for the escrow scheme.
  */

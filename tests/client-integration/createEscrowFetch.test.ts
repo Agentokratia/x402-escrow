@@ -8,7 +8,7 @@ import { describe, it, expect, beforeAll } from 'vitest';
 import { createWalletClient, http } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
 import { baseSepolia } from 'viem/chains';
-import { createEscrowFetch, EscrowScheme } from '@x402/escrow/client';
+import { createEscrowFetch, EscrowScheme } from '@agentokratia/x402-escrow/client';
 
 // Test wallet (don't use real funds)
 const TEST_PRIVATE_KEY = '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80';
@@ -328,7 +328,7 @@ console.log(`
 createEscrowFetch - Simple 2-Line API (Enhanced)
 =============================================================================
 
-import { createEscrowFetch } from '@x402/escrow/client';
+import { createEscrowFetch } from '@agentokratia/x402-escrow/client';
 
 // Simple (recommended) - 2 lines
 const { fetch: escrowFetch, scheme, x402 } = createEscrowFetch(walletClient);

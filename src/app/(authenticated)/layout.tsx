@@ -2,7 +2,7 @@
 
 import { useAccount, useChainId } from 'wagmi';
 import { useRouter, usePathname } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import Link from 'next/link';
 import { Key, Activity, BarChart3, Settings, Wallet } from 'lucide-react';
 import { useAuthStore, useAuthHydrated } from '@/lib/store/authStore';
@@ -10,13 +10,20 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 import { formatAddress } from '@/lib/format';
 import styles from './layout.module.css';
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default function AuthenticatedLayout({ children }: { children: React.ReactNode }) {
   const { isConnected, address } = useAccount();
   const chainId = useChainId();
   const { isAuthenticated, clearAuth, walletAddress } = useAuthStore();
   const isHydrated = useAuthHydrated();
   const router = useRouter();
   const pathname = usePathname();
+  const [pendingHref, setPendingHref] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
+
+  // Clear pending state when navigation completes
+  useEffect(() => {
+    setPendingHref(null);
+  }, [pathname]);
 
   // Redirect to home if not connected, not authenticated, or wallet changed
   useEffect(() => {
@@ -61,7 +68,23 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const networkName = chainId === 8453 ? 'Base' : 'Sepolia';
 
   const isActive = (href: string, exact = true) => {
-    return exact ? pathname === href : pathname.startsWith(href);
+    if (exact) return pathname === href;
+    return pathname.startsWith(href);
+  };
+
+  const handleNavClick = (href: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    if (pathname === href) return;
+    setPendingHref(href);
+    startTransition(() => {
+      router.push(href);
+    });
+  };
+
+  const getLinkClass = (href: string, exact = true) => {
+    const active = isActive(href, exact);
+    const pending = pendingHref === href && isPending;
+    return `${styles.navLink} ${active || pending ? styles.active : ''} ${pending ? styles.pending : ''}`;
   };
 
   return (
@@ -84,7 +107,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <nav className={styles.nav}>
           <Link
             href="/dashboard"
-            className={`${styles.navLink} ${isActive('/dashboard') ? styles.active : ''}`}
+            onClick={(e) => handleNavClick('/dashboard', e)}
+            className={getLinkClass('/dashboard')}
           >
             <BarChart3 size={18} />
             Home
@@ -93,14 +117,16 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <span className={styles.navLabel}>Accepting Payments</span>
           <Link
             href="/dashboard/api-keys"
-            className={`${styles.navLink} ${isActive('/dashboard/api-keys') ? styles.active : ''}`}
+            onClick={(e) => handleNavClick('/dashboard/api-keys', e)}
+            className={getLinkClass('/dashboard/api-keys')}
           >
             <Key size={18} />
             API Keys
           </Link>
           <Link
             href="/dashboard/sessions"
-            className={`${styles.navLink} ${isActive('/dashboard/sessions', false) ? styles.active : ''}`}
+            onClick={(e) => handleNavClick('/dashboard/sessions', e)}
+            className={getLinkClass('/dashboard/sessions', false)}
           >
             <Activity size={18} />
             Incoming Sessions
@@ -109,14 +135,16 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <span className={styles.navLabel}>Your Spending</span>
           <Link
             href="/wallet"
-            className={`${styles.navLink} ${isActive('/wallet') ? styles.active : ''}`}
+            onClick={(e) => handleNavClick('/wallet', e)}
+            className={getLinkClass('/wallet')}
           >
             <Wallet size={18} />
             My Funds
           </Link>
           <Link
             href="/wallet/sessions"
-            className={`${styles.navLink} ${isActive('/wallet/sessions', false) ? styles.active : ''}`}
+            onClick={(e) => handleNavClick('/wallet/sessions', e)}
+            className={getLinkClass('/wallet/sessions', false)}
           >
             <Activity size={18} />
             My Sessions
@@ -125,7 +153,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <div className={styles.navSpacer} />
           <Link
             href="/dashboard/settings"
-            className={`${styles.navLink} ${isActive('/dashboard/settings') ? styles.active : ''}`}
+            onClick={(e) => handleNavClick('/dashboard/settings', e)}
+            className={getLinkClass('/dashboard/settings')}
           >
             <Settings size={18} />
             Settings

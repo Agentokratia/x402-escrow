@@ -1,5 +1,5 @@
 /**
- * Shared Constants for @x402/escrow
+ * Shared Constants for @agentokratia/x402-escrow
  */
 
 // Zero address constant

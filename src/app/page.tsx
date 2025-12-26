@@ -565,7 +565,7 @@ export default function Home() {
                 className={styles.copyButton}
                 onClick={() =>
                   copyToClipboard(
-                    'npm install @x402/core @x402/express @x402/escrow',
+                    'npm install @x402/core @x402/express @agentokratia/x402-escrow',
                     setCopiedId,
                     'install'
                   )
@@ -599,7 +599,7 @@ export default function Home() {
               </button>
             </div>
             <pre className={styles.codeContent}>
-              npm install @x402/core @x402/express @x402/escrow
+              npm install @x402/core @x402/express @agentokratia/x402-escrow
             </pre>
           </div>
 
@@ -613,7 +613,7 @@ export default function Home() {
                     copyToClipboard(
                       `import { x402ResourceServer, HTTPFacilitatorClient } from '@x402/core/server';
 import { paymentMiddleware } from '@x402/express';
-import { EscrowScheme } from '@x402/escrow/server';
+import { EscrowScheme } from '@agentokratia/x402-escrow/server';
 
 const facilitator = new HTTPFacilitatorClient({
   url: 'https://facilitator.agentokratia.com',
@@ -668,7 +668,7 @@ app.use(paymentMiddleware({
                 className={styles.codeContent}
               >{`import { x402ResourceServer, HTTPFacilitatorClient } from '@x402/core/server';
 import { paymentMiddleware } from '@x402/express';
-import { EscrowScheme } from '@x402/escrow/server';
+import { EscrowScheme } from '@agentokratia/x402-escrow/server';
 
 const facilitator = new HTTPFacilitatorClient({
   url: 'https://facilitator.agentokratia.com',
@@ -695,7 +695,7 @@ app.use(paymentMiddleware({
                   className={styles.copyButton}
                   onClick={() =>
                     copyToClipboard(
-                      `import { createEscrowFetch } from '@x402/escrow/client';
+                      `import { createEscrowFetch } from '@agentokratia/x402-escrow/client';
 
 // walletClient from wagmi or viem
 const { fetch } = createEscrowFetch(walletClient);
@@ -739,7 +739,7 @@ const data = await response.json();`,
               </div>
               <pre
                 className={styles.codeContent}
-              >{`import { createEscrowFetch } from '@x402/escrow/client';
+              >{`import { createEscrowFetch } from '@agentokratia/x402-escrow/client';
 
 // walletClient from wagmi or viem
 const { fetch } = createEscrowFetch(walletClient);

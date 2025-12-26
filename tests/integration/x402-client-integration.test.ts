@@ -16,7 +16,7 @@ import {
   EscrowScheme,
   withSessionExtraction,
   withAxiosSessionExtraction,
-} from '@x402/escrow/client';
+} from '@agentokratia/x402-escrow/client';
 
 // For testing x402Client directly
 import { x402Client } from '@x402/core/client';
@@ -324,7 +324,7 @@ CLIENT INTEGRATION - x402Client + Session Wrappers
 
 import { x402Client } from '@x402/core/client';
 import { wrapFetchWithPayment } from '@x402/fetch';
-import { EscrowScheme, withSessionExtraction } from '@x402/escrow/client';
+import { EscrowScheme, withSessionExtraction } from '@agentokratia/x402-escrow/client';
 
 // Create scheme - network derived from wallet
 const escrowScheme = new EscrowScheme(walletClient);
@@ -363,7 +363,7 @@ CLIENT INTEGRATION - Axios
 
 import { x402Client } from '@x402/core/client';
 import { wrapAxiosWithPayment } from '@x402/axios';
-import { EscrowScheme, withAxiosSessionExtraction } from '@x402/escrow/client';
+import { EscrowScheme, withAxiosSessionExtraction } from '@agentokratia/x402-escrow/client';
 
 const escrowScheme = new EscrowScheme(walletClient);
 const x402 = new x402Client().register('eip155:84532', escrowScheme);

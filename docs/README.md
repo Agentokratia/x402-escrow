@@ -37,7 +37,7 @@
 ## Quick Start
 
 ```bash
-npm install @x402/core @x402/escrow
+npm install @x402/core @agentokratia/x402-escrow
 ```
 
 **Server** - Protect an endpoint:

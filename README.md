@@ -17,13 +17,13 @@ Session-based x402 payments for high-frequency APIs. One signature creates a ses
 ### Server Integration
 
 ```bash
-npm install @x402/core @x402/express @x402/escrow
+npm install @x402/core @x402/express @agentokratia/x402-escrow
 ```
 
 ```typescript
 import { x402ResourceServer, HTTPFacilitatorClient } from '@x402/core/server';
 import { paymentMiddleware } from '@x402/express';
-import { EscrowScheme } from '@x402/escrow/server';
+import { EscrowScheme } from '@agentokratia/x402-escrow/server';
 
 const facilitator = new HTTPFacilitatorClient({
   url: 'https://facilitator.agentokratia.com',
@@ -51,7 +51,7 @@ app.use(
 ### Client Integration
 
 ```typescript
-import { createEscrowFetch } from '@x402/escrow/client';
+import { createEscrowFetch } from '@agentokratia/x402-escrow/client';
 
 const { fetch: escrowFetch, scheme } = createEscrowFetch(walletClient);
 
@@ -130,7 +130,7 @@ npm run build
 
 ## License
 
-| Component          | License                          |
-| ------------------ | -------------------------------- |
-| Facilitator Server | [AGPL-3.0](./LICENSE)            |
-| @x402/escrow       | [MIT](./packages/escrow/LICENSE) |
+| Component                 | License                          |
+| ------------------------- | -------------------------------- |
+| Facilitator Server        | [AGPL-3.0](./LICENSE)            |
+| @agentokratia/x402-escrow | [MIT](./packages/escrow/LICENSE) |

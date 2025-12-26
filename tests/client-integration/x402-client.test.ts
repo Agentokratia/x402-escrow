@@ -14,7 +14,7 @@ import { privateKeyToAccount } from 'viem/accounts';
 import { baseSepolia } from 'viem/chains';
 import { x402Client } from '@x402/core/client';
 import { wrapFetchWithPayment } from '@x402/fetch';
-import { EscrowScheme } from '@x402/escrow/client';
+import { EscrowScheme } from '@agentokratia/x402-escrow/client';
 
 // Test configuration
 const TEST_API_KEY = process.env.TEST_API_KEY;

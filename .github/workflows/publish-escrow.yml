@@ -1,4 +1,4 @@
-name: Publish @x402/escrow
+name: Publish @agentokratia/x402-escrow
 
 on:
   workflow_dispatch:
@@ -25,10 +25,10 @@ jobs:
         run: npm ci
 
       - name: Build package
-        run: npm run build -w @x402/escrow
+        run: npm run build -w @agentokratia/x402-escrow
 
       - name: Publish to npm
-        run: npm publish -w @x402/escrow --access public --provenance
+        run: npm publish -w @agentokratia/x402-escrow --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 

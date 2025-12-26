@@ -1,5 +1,5 @@
 /**
- * @x402/escrow - Escrow Payment Scheme for x402 Protocol
+ * @agentokratia/x402-escrow - Escrow Payment Scheme for x402 Protocol
  *
  * Session-based payments for high-frequency APIs. One signature creates a session,
  * no more signing per request. Reclaim unused funds anytime.
@@ -8,7 +8,7 @@
  *
  * ### Simple (recommended)
  * ```typescript
- * import { createEscrowFetch } from '@x402/escrow/client';
+ * import { createEscrowFetch } from '@agentokratia/x402-escrow/client';
  *
  * const { fetch: escrowFetch, scheme } = createEscrowFetch(walletClient);
  * const response = await escrowFetch('https://api.example.com/premium');
@@ -18,7 +18,7 @@
  * ```typescript
  * import { x402Client } from '@x402/core/client';
  * import { wrapFetchWithPayment } from '@x402/fetch';
- * import { EscrowScheme, withSessionExtraction } from '@x402/escrow/client';
+ * import { EscrowScheme, withSessionExtraction } from '@agentokratia/x402-escrow/client';
  *
  * const escrowScheme = new EscrowScheme(walletClient);
  * const x402 = new x402Client().register('eip155:84532', escrowScheme);
@@ -34,7 +34,7 @@
  * ```typescript
  * import { paymentProxy } from '@x402/next';
  * import { x402ResourceServer, HTTPFacilitatorClient } from '@x402/core/server';
- * import { EscrowScheme } from '@x402/escrow/server';
+ * import { EscrowScheme } from '@agentokratia/x402-escrow/server';
  *
  * const facilitator = new HTTPFacilitatorClient({ url: 'https://facilitator.agentokratia.com' });
  * const server = new x402ResourceServer(facilitator)

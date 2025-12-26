@@ -1,4 +1,4 @@
-# @x402/escrow
+# @agentokratia/x402-escrow
 
 Escrow payment scheme for the x402 protocol. Session-based payments for high-frequency APIs.
 
@@ -12,7 +12,7 @@ Escrow payment scheme for the x402 protocol. Session-based payments for high-fre
 ## Installation
 
 ```bash
-npm install @x402/escrow
+npm install @agentokratia/x402-escrow
 ```
 
 ## Client Usage
@@ -22,7 +22,7 @@ For apps and agents paying for APIs.
 ### Simple (recommended)
 
 ```typescript
-import { createEscrowFetch } from '@x402/escrow/client';
+import { createEscrowFetch } from '@agentokratia/x402-escrow/client';
 
 const { fetch: escrowFetch, scheme, x402 } = createEscrowFetch(walletClient);
 
@@ -54,7 +54,7 @@ x402.onAfterPaymentCreation(async (ctx) => {
 ```typescript
 import { x402Client } from '@x402/core/client';
 import { wrapFetchWithPayment } from '@x402/fetch';
-import { EscrowScheme, withSessionExtraction } from '@x402/escrow/client';
+import { EscrowScheme, withSessionExtraction } from '@agentokratia/x402-escrow/client';
 
 const escrowScheme = new EscrowScheme(walletClient);
 const x402 = new x402Client().register('eip155:84532', escrowScheme);
@@ -71,7 +71,7 @@ For APIs accepting payments. Config is auto-discovered from facilitator.
 ```typescript
 import { x402ResourceServer, HTTPFacilitatorClient } from '@x402/core/server';
 import { paymentMiddleware } from '@x402/express';
-import { EscrowScheme } from '@x402/escrow/server';
+import { EscrowScheme } from '@agentokratia/x402-escrow/server';
 
 const facilitator = new HTTPFacilitatorClient({
   url: 'https://facilitator.agentokratia.com',
@@ -105,7 +105,7 @@ app.use(
 
 ```typescript
 import { paymentProxy } from '@x402/next';
-import { EscrowScheme } from '@x402/escrow/server';
+import { EscrowScheme } from '@agentokratia/x402-escrow/server';
 
 const server = new x402ResourceServer(facilitator).register('eip155:84532', new EscrowScheme());
 

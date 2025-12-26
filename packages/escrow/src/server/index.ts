@@ -8,7 +8,7 @@
  * ```typescript
  * import { x402ResourceServer, HTTPFacilitatorClient } from '@x402/core/server';
  * import { paymentMiddleware } from '@x402/express';
- * import { EscrowScheme } from '@x402/escrow/server';
+ * import { EscrowScheme } from '@agentokratia/x402-escrow/server';
  *
  * const facilitator = new HTTPFacilitatorClient({
  *   url: 'https://facilitator.agentokratia.com',

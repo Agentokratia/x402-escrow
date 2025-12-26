@@ -64,7 +64,7 @@
   "devDependencies": {
     "@coinbase/x402": "^2.0.0",
     "@x402/core": "^2.0.0",
-    "@x402/escrow": "workspace:*",
+    "@agentokratia/x402-escrow": "workspace:*",
     "@commitlint/cli": "^20.2.0",
     "@commitlint/config-conventional": "^20.2.0",
     "@types/node": "^20",

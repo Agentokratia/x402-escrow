@@ -196,6 +196,24 @@
   color: var(--stone);
 }
 
+.emptyInline {
+  text-align: center;
+  padding: var(--space-2xl) var(--space-xl);
+}
+
+.emptyInline h3 {
+  font-size: 18px;
+  margin-bottom: var(--space-sm);
+}
+
+.emptyInline p {
+  color: var(--stone);
+}
+
+.skeletonMeta {
+  margin-top: 4px;
+}
+
 .keyList {
   background: var(--white);
   border: 1px solid var(--sand);

@@ -11,7 +11,7 @@
 
 import { describe, it, expect, beforeAll } from 'vitest';
 
-import { EscrowScheme } from '@x402/escrow/server';
+import { EscrowScheme } from '@agentokratia/x402-escrow/server';
 
 // Test configuration (simulates what facilitator would return)
 const CHAIN_ID = 84532; // Base Sepolia
@@ -407,7 +407,7 @@ SIMPLIFIED SERVER SETUP (Config Auto-Discovery)
 
 import { x402ResourceServer, HTTPFacilitatorClient } from '@x402/core/server';
 import { paymentMiddleware } from '@x402/express';
-import { EscrowScheme } from '@x402/escrow/server';
+import { EscrowScheme } from '@agentokratia/x402-escrow/server';
 
 const facilitator = new HTTPFacilitatorClient({
   url: 'https://facilitator.agentokratia.com',
