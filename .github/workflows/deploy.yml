@@ -1,0 +1,53 @@
+name: Deploy Facilitator to Vercel
+
+# Setup (all done in browser, no local CLI needed):
+# 1. Create project in Vercel dashboard: vercel.com/new → Import Git Repository
+# 2. Get VERCEL_ORG_ID: Vercel dashboard → Settings → General → "Vercel ID"
+# 3. Get VERCEL_PROJECT_ID: Project → Settings → General → "Project ID"
+# 4. Get VERCEL_TOKEN: vercel.com/account/tokens → Create
+# 5. Add all 3 as GitHub secrets: Repo → Settings → Secrets → Actions
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deploy environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - preview
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+
+      - name: Pull Vercel Environment
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy Preview
+        if: ${{ inputs.environment == 'preview' }}
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy Production
+        if: ${{ inputs.environment == 'production' }}
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
