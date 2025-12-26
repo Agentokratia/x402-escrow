@@ -2,7 +2,7 @@
   "name": "x402-escrow",
   "version": "0.1.0",
   "description": "x402 Escrow Facilitator - Session-based payments for high-frequency APIs on Base",
-  "license": "MIT",
+  "license": "AGPL-3.0",
   "author": "Agentokratia",
   "repository": {
     "type": "git",
