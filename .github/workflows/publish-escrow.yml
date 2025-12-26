@@ -12,25 +12,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
+          cache: 'pnpm'
 
       - name: Get version from package.json
         id: version
         run: echo "version=$(node -p "require('./packages/escrow/package.json').version")" >> $GITHUB_OUTPUT
 
       - name: Install dependencies
-        run: |
-          rm -f package-lock.json
-          npm install
+        run: pnpm install
 
       - name: Build package
-        run: npm run build -w @agentokratia/x402-escrow
+        run: pnpm --filter @agentokratia/x402-escrow build
 
       - name: Publish to npm
-        run: npm publish -w @agentokratia/x402-escrow --access public --provenance
+        run: pnpm --filter @agentokratia/x402-escrow publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
