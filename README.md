@@ -130,4 +130,7 @@ npm run build
 
 ## License
 
-AGPL-3.0 - see [LICENSE](./LICENSE)
+| Component          | License                          |
+| ------------------ | -------------------------------- |
+| Facilitator Server | [AGPL-3.0](./LICENSE)            |
+| @x402/escrow       | [MIT](./packages/escrow/LICENSE) |

@@ -8,7 +8,7 @@ import { describe, it, expect, beforeAll } from 'vitest';
 import { createWalletClient, http } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
 import { baseSepolia } from 'viem/chains';
-import { createEscrowFetch, EscrowScheme } from '@/lib/x402-schemes/client';
+import { createEscrowFetch, EscrowScheme } from '@x402/escrow/client';
 
 // Test wallet (don't use real funds)
 const TEST_PRIVATE_KEY = '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80';

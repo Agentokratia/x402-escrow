@@ -69,4 +69,4 @@ export {
 } from './eip712';
 
 // Re-export version constant
-export { X402_VERSION } from '../../types';
+export { X402_VERSION } from '../types';

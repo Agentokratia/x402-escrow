@@ -1,17 +1,14 @@
 /**
- * x402 Escrow Schemes (v2) - Unified
+ * @x402/escrow - Escrow Payment Scheme for x402 Protocol
  *
- * Drop-in payment schemes for x402 protocol. Works exactly like official @x402/evm.
- *
- * The unified escrow scheme handles both:
- * - Session CREATION: Client sends signature + authorization (wallet signed)
- * - Session USAGE: Client sends session.id + session.token (no signature)
+ * Session-based payments for high-frequency APIs. One signature creates a session,
+ * no more signing per request. Reclaim unused funds anytime.
  *
  * ## Client Usage (Apps/Agents paying for APIs)
  *
  * ### Simple (recommended)
  * ```typescript
- * import { createEscrowFetch } from './lib/x402-schemes/client';
+ * import { createEscrowFetch } from '@x402/escrow/client';
  *
  * const { fetch: escrowFetch, scheme } = createEscrowFetch(walletClient);
  * const response = await escrowFetch('https://api.example.com/premium');
@@ -21,7 +18,7 @@
  * ```typescript
  * import { x402Client } from '@x402/core/client';
  * import { wrapFetchWithPayment } from '@x402/fetch';
- * import { EscrowScheme, withSessionExtraction } from './lib/x402-schemes/client';
+ * import { EscrowScheme, withSessionExtraction } from '@x402/escrow/client';
  *
  * const escrowScheme = new EscrowScheme(walletClient);
  * const x402 = new x402Client().register('eip155:84532', escrowScheme);
@@ -93,4 +90,4 @@ export {
   parsePaymentResponseHeader,
   type PaymentResponseData,
   type SettleResponse,
-} from '../types';
+} from './types';

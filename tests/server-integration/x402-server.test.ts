@@ -11,7 +11,7 @@
 
 import { describe, it, expect, beforeAll } from 'vitest';
 
-import { EscrowScheme } from '@/lib/x402-schemes/server';
+import { EscrowScheme } from '@x402/escrow/server';
 
 // Test configuration (simulates what facilitator would return)
 const CHAIN_ID = 84532; // Base Sepolia

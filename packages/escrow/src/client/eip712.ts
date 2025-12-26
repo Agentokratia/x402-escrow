@@ -14,7 +14,7 @@ import {
   type Address,
   type Hex,
 } from 'viem';
-import { ZERO_ADDRESS } from '../../constants';
+import { ZERO_ADDRESS } from '../constants';
 
 // ============================================================================
 // Types

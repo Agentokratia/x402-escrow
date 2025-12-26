@@ -22,7 +22,7 @@ import { baseSepolia } from 'viem/chains';
 import { testConfig, payerAccount, getUsdcBalance, formatUsdc } from '../setup.integration';
 
 // Import our unified scheme implementation
-import { EscrowScheme, type StoredSession } from '@/lib/x402-schemes/client';
+import { EscrowScheme, type StoredSession } from '@x402/escrow/client';
 
 // Import API helpers for facilitator communication
 import { verify, settle, getSupported, type EscrowSettleResponse } from '../utils/escrow';
@@ -550,7 +550,7 @@ INTEGRATION PATTERN FOR DEVELOPERS (Unified EscrowScheme)
 CLIENT SETUP:
 -------------
 import { x402Client } from '@x402/core/client';
-import { EscrowScheme } from './lib/x402-schemes/client';
+import { EscrowScheme } from '@x402/escrow/client';
 import { createWalletClient, http } from 'viem';
 import { baseSepolia } from 'viem/chains';
 

@@ -1,0 +1,74 @@
+{
+  "name": "@x402/escrow",
+  "version": "0.1.0",
+  "description": "Escrow payment scheme for x402 protocol - session-based payments for high-frequency APIs",
+  "license": "MIT",
+  "author": "Agentokratia",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agentokratia/x402-escrow",
+    "directory": "packages/escrow"
+  },
+  "homepage": "https://github.com/agentokratia/x402-escrow/tree/main/packages/escrow",
+  "bugs": "https://github.com/agentokratia/x402-escrow/issues",
+  "keywords": [
+    "x402",
+    "escrow",
+    "payments",
+    "ethereum",
+    "base",
+    "usdc",
+    "erc-3009",
+    "session"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./client": {
+      "types": "./dist/client/index.d.ts",
+      "import": "./dist/client/index.js",
+      "require": "./dist/client/index.cjs"
+    },
+    "./server": {
+      "types": "./dist/server/index.d.ts",
+      "import": "./dist/server/index.js",
+      "require": "./dist/server/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "viem": "^2.21.9"
+  },
+  "peerDependencies": {
+    "@x402/core": "^2.0.0",
+    "@x402/fetch": "^2.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@x402/fetch": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@x402/core": "^2.0.0",
+    "@x402/fetch": "^2.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  }
+}

@@ -36,7 +36,7 @@ describe('Escrow + Session Flow (Unified EscrowScheme)', () => {
   });
 
   it('complete flow: escrow creates session, then session reused', async () => {
-    const { EscrowScheme } = await import('@/lib/x402-schemes/client');
+    const { EscrowScheme } = await import('@x402/escrow/client');
     const { x402Client } = await import('@x402/core/client');
 
     // ==========================================================================
@@ -232,7 +232,7 @@ STEP 6: Session exhausted, back to ESCROW
   });
 
   it('priority: session over escrow when both available', async () => {
-    const { EscrowScheme } = await import('@/lib/x402-schemes/client');
+    const { EscrowScheme } = await import('@x402/escrow/client');
 
     const escrowScheme = new EscrowScheme(walletClient);
 
@@ -273,7 +273,7 @@ STEP 6: Session exhausted, back to ESCROW
 
 describe('Client Integration Pattern', () => {
   it('shows complete recommended client setup', async () => {
-    const { EscrowScheme } = await import('@/lib/x402-schemes/client');
+    const { EscrowScheme } = await import('@x402/escrow/client');
     const { x402Client, x402HTTPClient } = await import('@x402/core/client');
 
     const walletClient = createWalletClient({
@@ -303,7 +303,7 @@ RECOMMENDED CLIENT INTEGRATION (x402 v2 with Unified EscrowScheme)
 =============================================================================
 
 import { x402Client, x402HTTPClient } from '@x402/core/client';
-import { EscrowScheme } from './lib/x402-schemes/client';
+import { EscrowScheme } from '@x402/escrow/client';
 import { createWalletClient, http } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
 import { baseSepolia } from 'viem/chains';
@@ -423,7 +423,7 @@ HEADERS (x402 v2)
 
 describe('Server Integration Pattern', () => {
   it('shows server-side middleware setup', async () => {
-    const { EscrowServerScheme } = await import('@/lib/x402-schemes/server');
+    const { EscrowServerScheme } = await import('@x402/escrow/server');
 
     // Only EscrowServerScheme needed (unified - handles both creation and usage)
     const escrowScheme = new EscrowServerScheme({

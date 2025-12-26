@@ -16,8 +16,8 @@ import {
   generateRandomBytes,
   type PaymentRequirements,
   type Network,
-} from '../../types';
-import { ZERO_ADDRESS, DEFAULT_SESSION_DURATION, DEFAULT_REFUND_WINDOW } from '../../constants';
+} from '../types';
+import { ZERO_ADDRESS, DEFAULT_SESSION_DURATION, DEFAULT_REFUND_WINDOW } from '../constants';
 import { SessionManager } from './session-manager';
 import { signERC3009, computeEscrowNonce, type EIP712Domain } from './eip712';
 

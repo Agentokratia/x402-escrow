@@ -6,7 +6,7 @@
  */
 
 import type { Address } from 'viem';
-import type { Network } from '../../types';
+import type { Network } from '../types';
 import { createStorage, type SessionStorage, type StoredSession } from './storage';
 
 // Re-export for convenience

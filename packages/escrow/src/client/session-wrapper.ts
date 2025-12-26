@@ -34,7 +34,7 @@ import { isAddress, getAddress, type WalletClient } from 'viem';
 import { x402Client } from '@x402/core/client';
 import { wrapFetchWithPayment } from '@x402/fetch';
 import { EscrowScheme, type EscrowSchemeOptions } from './escrow';
-import { fromBase64 } from '../../types';
+import { fromBase64 } from '../types';
 
 // =============================================================================
 // Types

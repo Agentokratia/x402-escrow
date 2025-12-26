@@ -16,7 +16,7 @@ import {
   EscrowScheme,
   withSessionExtraction,
   withAxiosSessionExtraction,
-} from '@/lib/x402-schemes/client';
+} from '@x402/escrow/client';
 
 // For testing x402Client directly
 import { x402Client } from '@x402/core/client';
