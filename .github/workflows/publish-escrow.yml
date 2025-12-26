@@ -22,7 +22,9 @@ jobs:
         run: echo "version=$(node -p "require('./packages/escrow/package.json').version")" >> $GITHUB_OUTPUT
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          rm -f package-lock.json
+          npm install
 
       - name: Build package
         run: npm run build -w @agentokratia/x402-escrow
