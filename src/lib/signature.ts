@@ -1,7 +1,7 @@
 /**
  * EIP-712 Signature Verification for x402
  *
- * Verifies ERC-3009 ReceiveWithAuthorization signatures.
+ * Verifies ERC-3009 TransferWithAuthorization and ReceiveWithAuthorization signatures.
  * CRITICAL: Never accept payments without signature verification.
  */
 
@@ -27,8 +27,16 @@ export interface EIP712Domain {
   verifyingContract: Address;
 }
 
-// ERC-3009 ReceiveWithAuthorization type definition
-const RECEIVE_WITH_AUTHORIZATION_TYPES = {
+// ERC-3009 type definitions - same structure, different primary type names
+const ERC3009_TYPES = {
+  TransferWithAuthorization: [
+    { name: 'from', type: 'address' },
+    { name: 'to', type: 'address' },
+    { name: 'value', type: 'uint256' },
+    { name: 'validAfter', type: 'uint256' },
+    { name: 'validBefore', type: 'uint256' },
+    { name: 'nonce', type: 'bytes32' },
+  ],
   ReceiveWithAuthorization: [
     { name: 'from', type: 'address' },
     { name: 'to', type: 'address' },
@@ -38,6 +46,8 @@ const RECEIVE_WITH_AUTHORIZATION_TYPES = {
     { name: 'nonce', type: 'bytes32' },
   ],
 } as const;
+
+export type ERC3009PrimaryType = 'TransferWithAuthorization' | 'ReceiveWithAuthorization';
 
 // =============================================================================
 // Signature Verification
@@ -50,31 +60,44 @@ export interface VerifySignatureResult {
 }
 
 /**
- * Verify ERC-3009 ReceiveWithAuthorization signature.
+ * Verify ERC-3009 signature (TransferWithAuthorization or ReceiveWithAuthorization).
  *
  * @param authorization - The authorization parameters
  * @param signature - The EIP-712 signature (hex)
  * @param domain - EIP-712 domain parameters
+ * @param primaryType - The ERC-3009 function type (default: TransferWithAuthorization)
  * @returns Verification result with recovered address
  *
  * @example
  * ```typescript
+ * // Exact scheme (TransferWithAuthorization)
  * const result = await verifyERC3009Signature(
  *   { from: '0x...', to: '0x...', value: 1000000n, ... },
  *   '0x...',
  *   { name: 'USDC', version: '2', chainId: 84532, verifyingContract: '0x...' }
  * );
- * if (!result.valid) {
- *   return { isValid: false, invalidReason: 'invalid_signature' };
- * }
+ *
+ * // Escrow scheme (ReceiveWithAuthorization)
+ * const result = await verifyERC3009Signature(
+ *   { from: '0x...', to: '0x...', value: 1000000n, ... },
+ *   '0x...',
+ *   { name: 'USDC', version: '2', chainId: 84532, verifyingContract: '0x...' },
+ *   'ReceiveWithAuthorization'
+ * );
  * ```
  */
 export async function verifyERC3009Signature(
   authorization: ERC3009Authorization,
   signature: Hex,
-  domain: EIP712Domain
+  domain: EIP712Domain,
+  primaryType: ERC3009PrimaryType = 'TransferWithAuthorization'
 ): Promise<VerifySignatureResult> {
   try {
+    // Select the appropriate type definition
+    const types = {
+      [primaryType]: ERC3009_TYPES[primaryType],
+    };
+
     // Recover the signer address from the signature
     const recoveredAddress = await recoverTypedDataAddress({
       domain: {
@@ -83,8 +106,8 @@ export async function verifyERC3009Signature(
         chainId: domain.chainId,
         verifyingContract: domain.verifyingContract,
       },
-      types: RECEIVE_WITH_AUTHORIZATION_TYPES,
-      primaryType: 'ReceiveWithAuthorization',
+      types,
+      primaryType,
       message: {
         from: authorization.from,
         to: authorization.to,

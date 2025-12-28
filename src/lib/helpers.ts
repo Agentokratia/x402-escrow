@@ -4,7 +4,7 @@
 
 import { createPublicClient, http, type Address, type Hex } from 'viem';
 import { getNetworkFromString, type DbNetwork } from './db';
-import { verifyERC3009Signature, parseAuthorization } from './signature';
+import { verifyERC3009Signature, parseAuthorization, type ERC3009PrimaryType } from './signature';
 import { isNonceUsed } from './wallet';
 import { ERC20_ABI, ZERO_ADDRESS } from './constants';
 import type { PaymentInfo } from './escrow';
@@ -80,6 +80,7 @@ interface CommonCheckParams {
   networkId: string;
   eip712Name?: string;
   eip712Version?: string;
+  primaryType?: ERC3009PrimaryType;
 }
 
 /**
@@ -91,7 +92,7 @@ interface CommonCheckParams {
  * - Payer has sufficient balance
  */
 export async function validateCommonChecks(params: CommonCheckParams): Promise<ValidationResult> {
-  const { authorization, signature, networkId, eip712Name, eip712Version } = params;
+  const { authorization, signature, networkId, eip712Name, eip712Version, primaryType } = params;
   const payer = authorization.from.toLowerCase();
 
   // 1. Validate network
@@ -112,7 +113,8 @@ export async function validateCommonChecks(params: CommonCheckParams): Promise<V
       version,
       chainId: network.chain_id,
       verifyingContract: network.usdc_address as Address,
-    }
+    },
+    primaryType // Pass through to signature verification
   );
 
   if (!signatureResult.valid) {

@@ -12,6 +12,8 @@ import type { Address } from 'viem';
 // Types
 // ============================================================================
 
+export type SessionStatus = 'active' | 'inactive' | 'expired';
+
 export interface StoredSession {
   sessionId: string;
   sessionToken: string;
@@ -21,6 +23,7 @@ export interface StoredSession {
   balance: string;
   authorizationExpiry: number;
   createdAt: number;
+  status: SessionStatus;
 }
 
 export interface SessionStorage {
@@ -45,7 +48,8 @@ abstract class BaseStorage implements SessionStorage {
       if (
         session.network === network &&
         session.receiver.toLowerCase() === receiver.toLowerCase() &&
-        session.authorizationExpiry > now
+        session.authorizationExpiry > now &&
+        session.status === 'active'
       ) {
         return session;
       }
@@ -62,7 +66,8 @@ abstract class BaseStorage implements SessionStorage {
       if (
         session.network === network &&
         session.receiver.toLowerCase() === receiver.toLowerCase() &&
-        session.authorizationExpiry > now
+        session.authorizationExpiry > now &&
+        session.status === 'active'
       ) {
         const balance = BigInt(session.balance);
         if (balance >= minAmount && balance > bestBalance) {

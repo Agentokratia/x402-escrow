@@ -42,6 +42,37 @@ import { fromBase64 } from '../types';
 
 type FetchLike = typeof globalThis.fetch;
 
+/**
+ * Extended RequestInit with session selection option.
+ */
+export interface EscrowRequestInit extends RequestInit {
+  /**
+   * Session selection mode:
+   * - 'auto' (default): Auto-select best available session for the receiver
+   * - 'new': Force create new session (ignores existing sessions)
+   * - string (session ID): Use a specific session by ID
+   *
+   * @example
+   * ```typescript
+   * // Auto-select best session (default)
+   * await escrowFetch(url);
+   * await escrowFetch(url, { session: 'auto' });
+   *
+   * // Force new session creation
+   * await escrowFetch(url, { session: 'new' });
+   *
+   * // Use specific session
+   * await escrowFetch(url, { session: 'abc-123-def' });
+   * ```
+   */
+  session?: 'auto' | 'new' | string;
+}
+
+/**
+ * Escrow-aware fetch function with session options.
+ */
+export type EscrowFetch = (input: RequestInfo | URL, init?: EscrowRequestInit) => Promise<Response>;
+
 /** Options for createEscrowFetch */
 export interface CreateEscrowFetchOptions extends EscrowSchemeOptions {
   /** Custom fetch implementation (default: globalThis.fetch) */
@@ -51,7 +82,7 @@ export interface CreateEscrowFetchOptions extends EscrowSchemeOptions {
 /** Result from createEscrowFetch */
 export interface EscrowFetchResult {
   /** Fetch function with automatic payment + session handling */
-  fetch: FetchLike;
+  fetch: EscrowFetch;
   /** Access to underlying scheme for session management */
   scheme: EscrowScheme;
   /** Access to x402Client for adding hooks (onBeforePaymentCreation, etc.) */
@@ -66,26 +97,34 @@ export interface EscrowFetchResult {
  * Creates a fetch function with automatic escrow payment and session handling.
  * This is the simplest way to integrate x402 escrow payments.
  *
- * @example Simple usage
+ * @example Basic usage (auto-selects best session)
  * ```typescript
- * const { fetch: escrowFetch, scheme, x402 } = createEscrowFetch(walletClient);
+ * const { fetch: escrowFetch, scheme } = createEscrowFetch(walletClient);
  * const response = await escrowFetch('https://api.example.com/premium');
- *
- * // Access sessions
- * scheme.sessions.getAll();
- * scheme.sessions.hasValid(receiverAddress, '10000');
  * ```
  *
- * @example With custom fetch and hooks
+ * @example Session selection options
  * ```typescript
- * const { fetch: escrowFetch, x402 } = createEscrowFetch(walletClient, {
- *   fetch: customFetch, // Use ky, undici, node-fetch, etc.
- * });
+ * // Auto-select best session (default)
+ * await escrowFetch(url);
+ * await escrowFetch(url, { session: 'auto' });
  *
- * // Add hooks for user control
- * x402.onBeforePaymentCreation(async (ctx) => {
- *   console.log('About to pay:', ctx.paymentRequirements);
- * });
+ * // Force new session creation
+ * await escrowFetch(url, { session: 'new' });
+ *
+ * // Use specific session by ID
+ * await escrowFetch(url, { session: 'session-abc-123' });
+ * ```
+ *
+ * @example Access session manager
+ * ```typescript
+ * const { fetch: escrowFetch, scheme } = createEscrowFetch(walletClient);
+ *
+ * // List all sessions for a receiver
+ * const sessions = scheme.sessions.getAllForReceiver(receiverAddress);
+ *
+ * // Check if valid session exists
+ * scheme.sessions.hasValid(receiverAddress, '10000');
  * ```
  */
 export function createEscrowFetch(
@@ -98,9 +137,27 @@ export function createEscrowFetch(
   // Use custom fetch or default to globalThis.fetch
   const baseFetch = options?.fetch ?? globalThis.fetch;
   const paidFetch = wrapFetchWithPayment(baseFetch, x402) as FetchLike;
+  const wrappedFetch = withSessionExtraction(paidFetch, scheme);
+
+  // Create escrow-aware fetch that handles session option
+  const escrowFetch: EscrowFetch = async (input, init) => {
+    // Extract session option and pass rest to underlying fetch
+    const { session, ...fetchInit } = init || {};
+
+    // Set session mode on scheme before fetch
+    if (session === 'new') {
+      scheme.forceNewSession = true;
+    } else if (session && session !== 'auto') {
+      // Specific session ID
+      scheme.selectedSessionId = session;
+    }
+    // 'auto' or undefined = default behavior (findBest)
+
+    return wrappedFetch(input, fetchInit);
+  };
 
   return {
-    fetch: withSessionExtraction(paidFetch, scheme),
+    fetch: escrowFetch,
     scheme,
     x402, // Expose for adding hooks
   };

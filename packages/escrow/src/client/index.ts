@@ -43,12 +43,14 @@
 // Simple API (recommended)
 export {
   createEscrowFetch,
+  type EscrowFetch,
   type EscrowFetchResult,
+  type EscrowRequestInit,
   type CreateEscrowFetchOptions,
 } from './session-wrapper';
 
 // Core scheme (for advanced use with x402Client)
-export { EscrowScheme, type EscrowSchemeOptions } from './escrow';
+export { EscrowScheme, type EscrowSchemeOptions, type PayloadOptions } from './escrow';
 
 // Session wrappers for x402 integration
 export { withSessionExtraction, withAxiosSessionExtraction } from './session-wrapper';

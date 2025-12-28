@@ -41,12 +41,12 @@ INSERT INTO networks (
    '0xbdea0d1bcc5966192b070fdf62ab4ef5b4420cff', '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913',
    '0xca11bde05977b3631167028862be2a173976ca11', '0x0e3df9510de65469c4518d7843919c0b8c7a7757',
    '0x992476b9ee81d52a5bda0622c333938d0af0ab26', 'https://basescan.org',
-   false, true, 'USDC', '2'),
+   false, true, 'USD Coin', '2'),  -- Mainnet USDC uses "USD Coin" for EIP-712 domain
   ('eip155:84532', 'Base Sepolia', 84532, 'https://sepolia.base.org',
    '0xbdea0d1bcc5966192b070fdf62ab4ef5b4420cff', '0x036cbd53842c5426634e7929541ec2318f3dcf7e',
    '0xca11bde05977b3631167028862be2a173976ca11', '0x0e3df9510de65469c4518d7843919c0b8c7a7757',
    '0x992476b9ee81d52a5bda0622c333938d0af0ab26', 'https://sepolia.basescan.org',
-   true, true, 'USD Coin', '2');
+   true, true, 'USDC', '2');  -- Testnet USDC uses "USDC" for EIP-712 domain
 
 -- ============================================================================
 -- USERS TABLE (one per wallet)

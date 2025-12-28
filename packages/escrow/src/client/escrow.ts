@@ -37,8 +37,25 @@ interface SchemeNetworkClient {
   readonly scheme: string;
   createPaymentPayload(
     x402Version: number,
-    paymentRequirements: PaymentRequirements
+    paymentRequirements: PaymentRequirements,
+    options?: PayloadOptions
   ): Promise<Pick<PaymentPayload, 'x402Version' | 'payload'>>;
+}
+
+/**
+ * Options for createPaymentPayload
+ */
+export interface PayloadOptions {
+  /**
+   * Force creation of a new session even if a valid existing session exists.
+   * Useful when the user explicitly wants a fresh session with new deposit.
+   */
+  forceNew?: boolean;
+  /**
+   * Use a specific session by ID instead of auto-selecting the best one.
+   * If the session doesn't exist or is expired, falls back to creating new session.
+   */
+  sessionId?: string;
 }
 
 interface EscrowExtra {
@@ -99,6 +116,11 @@ export class EscrowScheme implements SchemeNetworkClient {
   private readonly refundWindow: number;
   private readonly customDepositAmount?: bigint;
 
+  /** Force new session on next createPaymentPayload call (resets after use) */
+  forceNewSession = false;
+  /** Use specific session ID on next createPaymentPayload call (resets after use) */
+  selectedSessionId?: string;
+
   constructor(walletClient: WalletClient, options: EscrowSchemeOptions = {}) {
     if (!walletClient.account) {
       throw new Error('WalletClient must have an account');
@@ -128,19 +150,57 @@ export class EscrowScheme implements SchemeNetworkClient {
   /**
    * Creates payment payload for escrow scheme.
    * Auto-detects whether to create new session or use existing one.
+   *
+   * @param x402Version - Protocol version
+   * @param paymentRequirements - Payment requirements from 402 response
+   * @param options - Optional payload options
+   * @param options.forceNew - Skip session lookup, always create new session
    */
   async createPaymentPayload(
     x402Version: number,
-    paymentRequirements: PaymentRequirements
+    paymentRequirements: PaymentRequirements,
+    options?: PayloadOptions
   ): Promise<Pick<PaymentPayload, 'x402Version' | 'payload'>> {
     const receiver = getAddress(paymentRequirements.payTo);
     const amount = BigInt(paymentRequirements.amount);
 
-    // Check for existing session (auto-preference)
-    const existingSession = this.sessions.findBest(receiver, amount);
+    // Check forceNew from options or instance flag (instance flag resets after use)
+    const shouldForceNew = options?.forceNew || this.forceNewSession;
+    if (this.forceNewSession) {
+      this.forceNewSession = false; // Reset after use
+    }
 
-    if (existingSession) {
-      return this.createUsagePayload(x402Version, existingSession, paymentRequirements.amount);
+    // Check for specific session ID from options or instance flag
+    const targetSessionId = options?.sessionId || this.selectedSessionId;
+    if (this.selectedSessionId) {
+      this.selectedSessionId = undefined; // Reset after use
+    }
+
+    // Skip session lookup if forceNew is true
+    if (!shouldForceNew) {
+      let existingSession;
+
+      // If specific session ID requested, use that
+      if (targetSessionId) {
+        existingSession = this.sessions.getById(targetSessionId);
+        // Validate session is still usable
+        if (existingSession) {
+          const now = Date.now() / 1000;
+          if (
+            existingSession.authorizationExpiry <= now ||
+            BigInt(existingSession.balance) < amount
+          ) {
+            existingSession = null; // Session expired or insufficient balance
+          }
+        }
+      } else {
+        // Auto-select best session
+        existingSession = this.sessions.findBest(receiver, amount);
+      }
+
+      if (existingSession) {
+        return this.createUsagePayload(x402Version, existingSession, paymentRequirements.amount);
+      }
     }
 
     return this.createCreationPayload(x402Version, paymentRequirements);

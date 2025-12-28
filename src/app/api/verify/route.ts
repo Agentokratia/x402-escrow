@@ -325,7 +325,8 @@ async function verifyEscrowCreation(
         version: eip712Version,
         chainId: network.chain_id,
         verifyingContract: network.usdc_address as Address,
-      }
+      },
+      'ReceiveWithAuthorization' // Escrow uses ReceiveWithAuthorization
     );
 
     if (!signatureResult.valid) {

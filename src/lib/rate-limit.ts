@@ -92,46 +92,61 @@ class RateLimiter {
 // Default Rate Limiters
 // =============================================================================
 
-// /api/supported - public endpoint, stricter limits
+// =============================================================================
+// Production Rate Limits
+// =============================================================================
+// These are tuned for a payment facilitator handling real traffic.
+// Consider using Redis for distributed rate limiting in production.
+
+// /api/supported - public discovery endpoint
+// Higher limit since it's just returning config, cached anyway
 const supportedLimiter = new RateLimiter({
-  max: 100, // 100 requests
-  windowMs: 60_000, // per minute
+  max: 60, // 60 requests per minute (1/sec sustained)
+  windowMs: 60_000,
 });
 
-// /api/verify and /api/settle - authenticated, per API key
+// /api/verify and /api/settle - authenticated payment operations
+// Per API key - HIGH LIMIT for session-based payments
+// Session usage is cheap (DB only, no blockchain), so we allow high throughput
+// This is the main value prop of escrow - fast, frequent payments
 const authLimiter = new RateLimiter({
-  max: 1000, // 1000 requests
-  windowMs: 60_000, // per minute
+  max: 6000, // 6000 requests per minute (100/sec sustained)
+  windowMs: 60_000,
 });
 
-// Failed auth attempts - stricter
+// Failed auth attempts - prevent brute force on API keys
+// Strict but allows for legitimate retry logic
 const authFailureLimiter = new RateLimiter({
-  max: 10, // 10 failures
-  windowMs: 300_000, // per 5 minutes
+  max: 20, // 20 failures before lockout
+  windowMs: 900_000, // 15 minute window (gives time to fix issues)
 });
 
-// /api/auth/nonce - public, prevent nonce flooding
+// /api/auth/nonce - SIWE nonce generation
+// One per login attempt is normal
 const nonceLimiter = new RateLimiter({
-  max: 10, // 10 nonces
-  windowMs: 60_000, // per minute
+  max: 20, // 20 nonces per minute (handles page refreshes, retries)
+  windowMs: 60_000,
 });
 
-// /api/auth/verify - public, prevent brute force on SIWE
+// /api/auth/verify - SIWE signature verification
+// Strict to prevent brute force, but allow retries
 const siweVerifyLimiter = new RateLimiter({
-  max: 5, // 5 attempts
-  windowMs: 60_000, // per minute
+  max: 10, // 10 attempts per minute
+  windowMs: 60_000,
 });
 
-// JWT-authenticated management endpoints
+// JWT-authenticated management endpoints (dashboard, sessions list)
+// Higher limit for UI that makes multiple calls
 const managementLimiter = new RateLimiter({
-  max: 100, // 100 requests
-  windowMs: 60_000, // per minute
+  max: 120, // 120 requests per minute (2/sec sustained)
+  windowMs: 60_000,
 });
 
-// Reclaim operations (on-chain, expensive)
+// Reclaim operations (on-chain transactions, gas costs)
+// Keep strict - these trigger actual blockchain transactions
 const reclaimLimiter = new RateLimiter({
-  max: 10, // 10 reclaims
-  windowMs: 300_000, // per 5 minutes
+  max: 5, // 5 reclaims per 10 minutes
+  windowMs: 600_000,
 });
 
 // =============================================================================

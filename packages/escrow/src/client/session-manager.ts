@@ -7,10 +7,15 @@
 
 import type { Address } from 'viem';
 import type { Network } from '../types';
-import { createStorage, type SessionStorage, type StoredSession } from './storage';
+import {
+  createStorage,
+  type SessionStorage,
+  type StoredSession,
+  type SessionStatus,
+} from './storage';
 
 // Re-export for convenience
-export type { StoredSession } from './storage';
+export type { StoredSession, SessionStatus } from './storage';
 
 export interface SessionManagerOptions {
   /** Storage type: 'memory' (default) or 'localStorage' */
@@ -40,8 +45,18 @@ export class SessionManager {
   /**
    * Store a session from escrow settlement response.
    */
-  store(session: Omit<StoredSession, 'createdAt'>): void {
-    this.storage.set({ ...session, createdAt: Date.now() });
+  store(session: Omit<StoredSession, 'createdAt' | 'status'>): void {
+    this.storage.set({ ...session, createdAt: Date.now(), status: 'active' });
+  }
+
+  /**
+   * Update session status (e.g., mark as inactive when reclaimed).
+   */
+  setStatus(sessionId: string, status: SessionStatus): void {
+    const session = this.storage.list().find((s) => s.sessionId === sessionId);
+    if (session) {
+      this.storage.set({ ...session, status });
+    }
   }
 
   /**
@@ -80,6 +95,29 @@ export class SessionManager {
    */
   getAll(): StoredSession[] {
     return this.storage.list();
+  }
+
+  /**
+   * Get all active sessions for a specific receiver.
+   */
+  getAllForReceiver(receiver: Address): StoredSession[] {
+    const now = Date.now() / 1000;
+    return this.storage
+      .list()
+      .filter(
+        (s) =>
+          s.network === this.network &&
+          s.receiver.toLowerCase() === receiver.toLowerCase() &&
+          s.authorizationExpiry > now &&
+          s.status === 'active'
+      );
+  }
+
+  /**
+   * Get session by ID.
+   */
+  getById(sessionId: string): StoredSession | null {
+    return this.storage.list().find((s) => s.sessionId === sessionId) || null;
   }
 
   /**
