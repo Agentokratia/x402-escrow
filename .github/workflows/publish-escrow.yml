@@ -32,10 +32,9 @@ jobs:
       - name: Build package
         run: pnpm --filter @agentokratia/x402-escrow build
 
-      - name: Publish to npm
-        run: pnpm --filter @agentokratia/x402-escrow publish --access public --no-git-checks --provenance
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish to npm (using npm for OIDC support)
+        working-directory: packages/escrow
+        run: npm publish --access public --provenance
 
       - name: Create git tag
         run: |
