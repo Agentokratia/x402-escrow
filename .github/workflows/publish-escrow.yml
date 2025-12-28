@@ -18,8 +18,11 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'pnpm'
+
+      - name: Upgrade npm for OIDC support
+        run: npm install -g npm@latest
 
       - name: Get version from package.json
         id: version
@@ -31,9 +34,9 @@ jobs:
       - name: Build package
         run: pnpm --filter @agentokratia/x402-escrow build
 
-      - name: Publish to npm (using npm for OIDC support)
+      - name: Publish to npm with OIDC
         working-directory: packages/escrow
-        run: npm publish --access public --provenance
+        run: npm publish --access public
 
       - name: Create git tag
         run: |
