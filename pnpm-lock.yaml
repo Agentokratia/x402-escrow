@@ -110,10 +110,6 @@ importers:
         version: 2.1.9(@types/node@20.19.27)
 
   packages/escrow:
-    dependencies:
-      viem:
-        specifier: ^2.21.9
-        version: 2.43.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.2.1)
     devDependencies:
       '@x402/core':
         specifier: ^2.0.0
@@ -127,6 +123,9 @@ importers:
       typescript:
         specifier: ^5.0.0
         version: 5.9.3
+      viem:
+        specifier: ^2.21.9
+        version: 2.43.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.2.1)
 
 packages:
 
