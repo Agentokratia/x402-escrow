@@ -6,11 +6,11 @@
   "author": "Agentokratia",
   "repository": {
     "type": "git",
-    "url": "https://github.com/agentokratia/x402-escrow",
+    "url": "https://github.com/Agentokratia/x402-escrow",
     "directory": "packages/escrow"
   },
-  "homepage": "https://github.com/agentokratia/x402-escrow/tree/main/packages/escrow",
-  "bugs": "https://github.com/agentokratia/x402-escrow/issues",
+  "homepage": "https://github.com/Agentokratia/x402-escrow/tree/main/packages/escrow",
+  "bugs": "https://github.com/Agentokratia/x402-escrow/issues",
   "keywords": [
     "x402",
     "escrow",
