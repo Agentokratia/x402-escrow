@@ -1,6 +1,6 @@
 {
   "name": "@agentokratia/x402-escrow",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Escrow payment scheme for x402 protocol - session-based payments for high-frequency APIs",
   "license": "MIT",
   "author": "Agentokratia",
