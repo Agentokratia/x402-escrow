@@ -28,6 +28,31 @@ const spaceMono = Space_Mono({
 export const metadata: Metadata = {
   title: 'x402 Escrow Facilitator | Agentokratia',
   description: 'Session-based payments for AI agents. Authorize once, use many times.',
+  icons: {
+    icon: '/favicon.svg',
+    apple: '/logo.svg',
+  },
+  openGraph: {
+    title: 'x402 Escrow Facilitator | Agentokratia',
+    description: 'Session-based payments for AI agents. Authorize once, use many times.',
+    url: 'https://facilitator.agentokratia.com',
+    siteName: 'Agentokratia',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'x402 Escrow Facilitator - Session-based payments for AI agents',
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'x402 Escrow Facilitator | Agentokratia',
+    description: 'Session-based payments for AI agents. Authorize once, use many times.',
+    images: ['/og-image.png'],
+  },
 };
 
 export default function RootLayout({

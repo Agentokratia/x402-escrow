@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#FAFAF8"/>
+
+  <!-- Logo (scaled from favicon) -->
+  <g transform="translate(100, 255) scale(2.5)">
+    <rect width="32" height="32" rx="6" fill="#1A1A1A"/>
+    <path d="M16 8L7 28H11L12.5 24H19.5L21 28H25L16 8Z" fill="#FAFAF8"/>
+    <path d="M16 14L14 21H18L16 14Z" fill="#1A1A1A"/>
+    <circle cx="9" cy="7" r="2" fill="#FAFAF8"/>
+    <circle cx="16" cy="4" r="2" fill="#FAFAF8"/>
+    <circle cx="23" cy="7" r="2" fill="#FAFAF8"/>
+  </g>
+
+  <!-- Text -->
+  <text x="210" y="300" font-family="system-ui, -apple-system, sans-serif" font-size="52" font-weight="600" fill="#1A1A1A">Agentokratia</text>
+  <text x="210" y="355" font-family="Georgia, serif" font-size="28" fill="#6B6B6B">Monetize your agent. Instantly.</text>
+</svg>

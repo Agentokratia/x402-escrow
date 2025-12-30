@@ -131,9 +131,8 @@ export async function GET(request: Request) {
 
     const responseData = {
       kinds,
-      // 'escrow' is the unified extension - handles both session creation and usage
-      // 'session' scheme is deprecated but kept in list for backward compatibility
-      extensions: ['escrow'],
+      // Agentokratia extension - enables marketplace features like dynamic agent registration
+      extensions: ['agentokratia'],
       signers,
     };
 

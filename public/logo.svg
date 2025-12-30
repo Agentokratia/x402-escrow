@@ -1,0 +1,9 @@
+<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Agentokratia Logo - Primary (Light Background) -->
+    <!-- Crown Dots + A Mark -->
+    <path d="M16 8L7 28H11L12.5 24H19.5L21 28H25L16 8Z" fill="#1A1A1A"/>
+    <path d="M16 14L14 21H18L16 14Z" fill="#FAFAF8"/>
+    <circle cx="9" cy="7" r="2" fill="#1A1A1A"/>
+    <circle cx="16" cy="4" r="2" fill="#1A1A1A"/>
+    <circle cx="23" cy="7" r="2" fill="#1A1A1A"/>
+</svg>
